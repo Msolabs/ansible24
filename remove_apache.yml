@@ -13,6 +13,11 @@
       name: apache2
       state: absent
 
+  - name: Remove nginx package
+    apt:
+      name: nginx
+      state: absent
+
   - name: Add php support for Apache
     apt:
       name: libapache2-mod-php

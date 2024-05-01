@@ -1,19 +1,30 @@
 ---
 
 - hosts: all
-  become: true
+  become: yes
   tasks: 
   
-  - name: Update Repository Index
-    apt:
-     update_cache: yes
 
-  - name: Install apache2 package
+  - name: Update Repo index Install apache2 package and support package
     apt:
-      name: apache2
+      update_cache: yes
+      name: 
+        apache2
+        libapache2-mod-php
       state: latest
+    when: ansible_distribution == "Ubuntu"
 
-  - name: Add php support for Apache
-    apt:
-      name: libapache2-mod-php
+
+
+
+  - name: Update Repository Index Install apache2 package and support pacakge
+    dnf:
+      update_cache: yes
+      name: 
+        httpd
+        php
       state: latest
+    when: ansible_distribution == "Oracle Linux"
+
+
+
